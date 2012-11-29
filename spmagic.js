@@ -66,12 +66,19 @@ spMagic = {
 			site: " site" + _spPageContextInfo.siteServerRelativeUrl.replace(/\W/g, "-"),
 			web: " web" + _spPageContextInfo.webServerRelativeUrl.replace(/\W/g, "-"),
 			pagestate: " page-state-" + (SP.Ribbon.PageState.Handlers.isInEditMode() ? "view" : "edit"),
+			host: " url-" + location.hostname.replace(/\./g, "-").toLowerCase(),
+			path: location.pathname,
+			paths: " path-" + this.path.substring(1, this.path.lastIndexOf('/')).split("/").join(" path-").toLowerCase(),
+			file: " file-" + this.path.substring(this.path.lastIndexOf('/') + 1, this.path.lastIndexOf('.')).toLowerCase(),
+			qryParam_Val: " query-" + location.search.substring(1).replace(/\=/g, "_").replace(/\+/g, "_").split("&").join(" query-").toLowerCase(),
+			qryParam: this.qryParam_Val.replace(/_\w\b/g, ""),
+			userid: ((window._spUserId == undefined) ? "user-anonymous" : "user-" + window._spUserId),
 			/**
 			 * Adds various classes to the body element
 			 * @return {string} The updated document.body.className
 			 */
 			theBody: function() {
-				document.body.className += this.site + this.web + this.pagestate;
+				document.body.className += this.site + this.web + this.pagestate + this.host + this.paths + this.file + this.qryParam + this.qryParam_Vals;
 				return document.body.className;
 			}
 		}
