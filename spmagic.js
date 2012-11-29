@@ -72,7 +72,7 @@ spMagic = {
 			file: " file-" + this.path.substring(this.path.lastIndexOf('/') + 1, this.path.lastIndexOf('.')).toLowerCase(),
 			qryParam_Val: " query-" + location.search.substring(1).replace(/\=/g, "_").replace(/\+/g, "_").split("&").join(" query-").toLowerCase(),
 			qryParam: this.qryParam_Val.replace(/_\w\b/g, ""),
-			userid: ((window._spUserId == undefined) ? "user-anonymous" : " user-" + window._spUserId),
+			userid: ((window._spUserId == undefined) ? " user-anonymous" : " user-" + window._spUserId),
 			/**
 			 * Adds various classes to the body element
 			 * @return {string} The updated document.body.className
