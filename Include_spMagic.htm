@@ -1,0 +1,34 @@
+<!-- Link to this file in Content Editor Web Part to call and test spMagic on a page -->
+
+<!-- on next line - change src to spMagic.js on your site  -->
+<script type="text/javascript" src="/Utilities/spMagic.js"></script> 
+
+<script type="text/javascript">
+
+<!-- in case browser does not support this method - now it does -->
+function getElementsByClassName(searchClass) {
+    if(document.getElementsByClassName) {
+        var els = document.getElementsByClassName(searchClass);
+        return els;
+    }
+    var els = document.getElementsByTagName('*'),elsLen=els.length,classElements=[];
+    var pattern = new RegExp("\\b"+searchClass+"\\b");
+    for (var i = 0,j = 0; i < elsLen; i++) {
+        if ( pattern.test(els[i].className) ) {
+            classElements[j] = els[i];
+            j++;
+        }
+    }
+    return classElements;
+}
+
+<!-- this function runs after scripts load to call & test spMagic  -->
+function CallThis()
+{
+//call spMagic
+spMagic.DesignHelpers.Decorate.theBody();  
+//test spMagic
+getElementsByClassName('user-'+_spUserId)[0].style.backgroundColor="red";  // search for class & apply style to 
+}
+ExecuteOrDelayUntilScriptLoaded(CallThis,"SP.js");
+</script>
